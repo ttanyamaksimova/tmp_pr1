@@ -1,7 +1,7 @@
 from tkinter import *
 
 form1 = Tk()
-W, H, L, T = 320, 240, 600, 250
+W, H, L, T = 420, 240, 600, 250
 form1.geometry(f"{W}x{H}+{L}+{T}")
 form1.config(bg="darkgreen")
 
