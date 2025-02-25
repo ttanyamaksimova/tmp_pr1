@@ -3,7 +3,7 @@ from tkinter import *
 form1 = Tk()
 W, H, L, T = 320, 240, 600, 250
 form1.geometry(f"{W}x{H}+{L}+{T}")
-form1.config(bg="cyan")
+form1.config(bg="darkgreen")
 
 frame1 = Frame()
 frame1.pack(side=LEFT)
