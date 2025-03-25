@@ -28,7 +28,7 @@ plants_db = [
 
 # Главная страница
 @app.get("/", response_class=PlainTextResponse)
-def root():
+async def root():
     return (
         "Добро пожаловать в базу данных растений магазина!\n\n"
         "Это серверное приложение позволяет вам управлять информацией о растениях.\n\n"
@@ -43,13 +43,13 @@ def root():
 
 # Получение списка всех растений
 @app.get("/plants/", response_model=list[Plant])
-def get_plants():
+async def get_plants():
     return plants_db
 
 
 # Получение информации о конкретном растении по ID
 @app.get("/plants/{plant_id}", response_model=Plant)
-def get_plant(plant_id: int):
+async def get_plant(plant_id: int):
     for plant in plants_db:
         if plant.id == plant_id:
             return plant
@@ -58,7 +58,7 @@ def get_plant(plant_id: int):
 
 # Добавление нового растения
 @app.post("/plants/")
-def add_plant(new_plant: Plant):
+async def add_plant(new_plant: Plant):
     for plant in plants_db:
         if plant.id == new_plant.id:
             raise HTTPException(status_code=400, detail="Растение с указанным ID уже существует")
@@ -68,7 +68,7 @@ def add_plant(new_plant: Plant):
 
 # Обновление информации о растении
 @app.put("/plants/{plant_id}")
-def update_plant(plant_id: int, updated_plant: Plant):
+async def update_plant(plant_id: int, updated_plant: Plant):
     for i, plant in enumerate(plants_db):
         if plant.id == plant_id:
             if updated_plant.id != plant_id:
@@ -82,7 +82,7 @@ def update_plant(plant_id: int, updated_plant: Plant):
 
 # Удаление растения
 @app.delete("/plants/{plant_id}")
-def delete_plant(plant_id: int):
+async def delete_plant(plant_id: int):
     for i, plant in enumerate(plants_db):
         if plant.id == plant_id:
             del plants_db[i]
